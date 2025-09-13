@@ -1,0 +1,95 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #000;
+  overflow: hidden;
+}
+
+.splash__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top; /* keeps shifted down */
+  pointer-events: none;
+}
+
+.splash__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.splash__tagline {
+  color: #fff;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  -webkit-text-stroke: 1.5px #000; /* black outline */
+}
+
+
+/* Base button (unchanged from earlier except a bit more padding) */
+.enter-btn {
+  position: relative;
+  z-index: 2;
+  width: min(320px, 84vw);
+  padding: 22px 24px;
+  font-weight: 900;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  border-radius: 30px;
+  border: 3px solid #111;
+  background: var(--brand, #ffd400);
+  color: #111;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #111, 0 12px 28px rgba(0,0,0,.28);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+
+/* Hover: slow rainbow + bounce */
+.enter-btn:hover {
+  /* animated rainbow gradient */
+  background: linear-gradient(
+    90deg,
+    #ff6b6b, #ffd166, #06d6a0, #118ab2, #9b5de5, #ff6b6b
+  );
+  background-size: 400% 400%;
+  animation:
+    bounce 0.9s ease-in-out infinite alternate,
+    rainbow 8s linear infinite;
+}
+
+/* Pressed feel still works while hovering */
+.enter-btn:active {
+  transform: translateY(2px) scale(0.99);
+  box-shadow: 0 4px 0 #111, 0 8px 18px rgba(0,0,0,.22);
+}
+
+/* Keyframes */
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+@keyframes rainbow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .enter-btn:hover {
+    animation: none;
+    background: var(--brand, #ffd400);
+  }
+}
