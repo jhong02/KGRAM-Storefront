@@ -1,0 +1,29 @@
+/* Hero */
+.home .hero{ text-align:center; padding: clamp(32px, 6vw, 64px) 0 24px; }
+.home .hero h1{ font-size: clamp(36px, 6vw, 72px); margin:0 0 6px; font-weight:900; }
+.home .hero h2{ font-size: clamp(22px, 3.2vw, 36px); margin:0 0 6px; font-weight:900; }
+.home .hero p{ opacity:.8; margin:0; }
+
+/* Grid */
+.grid{
+  display:grid;
+  gap:28px;
+  margin-bottom:64px;
+  grid-template-columns: 1fr;
+}
+@media (min-width:640px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (min-width:1024px){ .grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (min-width:1280px){ .grid{ grid-template-columns: repeat(4, 1fr); } }
+
+/* Cards */
+.card{
+  background:#fff; border:3px solid #111; border-radius:10px; padding:12px;
+  display:flex; flex-direction:column;
+}
+.card .thumb{
+  aspect-ratio: 4 / 5;
+  background:linear-gradient(135deg,#a3c8ff,#fff);
+  border-radius:8px; border:3px solid #111; margin-bottom:12px;
+}
+.card h3{ font-size:14px; font-weight:800; margin:6px 0; text-transform:uppercase; }
+.card .price{ font-size:14px; }
