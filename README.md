@@ -1,48 +1,59 @@
 # KGRAM-Storefront
-A custom React.js storefront with a unique Figma-designed UI, styled beyond the usual templates. Backend runs on the WooCommerce API to handle products, orders, payments, and shipping.
 
-🛍️ React + WooCommerce Storefront
+A React.js storefront with styling and a Blender intro. The frontend is designed in Figma, with a focus on a shopping experience.  
+Backend runs on the WooCommerce API to handle products, orders, payments, and more.  
 
-A custom React.js storefront with unique, design-driven styling and a Blender-animated intro. The frontend is designed entirely in Figma, with a focus on a sleek, modern shopping experience.
+---
 
-✨ Features
+## 📌 Features
 
-Custom React.js Frontend – Unique UI/UX with handcrafted layouts and animations.
+- **React.js Frontend**  
+  - UI/UX with layouts and animations  
 
-Blender Intro – 3D intro animation for a memorable first impression.
+- **Blender Intro**  
+  - 3D intro animation  
 
-WooCommerce API Integration – React frontend communicates with WooCommerce backend.
+- **WooCommerce API Integration**  
+  - React frontend communicates with WooCommerce backend  
 
-🔗 WooCommerce API Backend (handles the following)
+---
 
-Product Management: Fetch product lists, categories, stock availability, pricing.
+## 🔗 WooCommerce API Backend
 
-Cart & Checkout: Add/remove items, calculate totals, process checkout.
+- **Product Management**  
+  Fetch product lists, categories, stock availability, pricing  
 
-Customer Accounts: Handle registration, login, and profile management.
+- **Cart & Checkout**  
+  Add/remove items, calculate totals, process checkout  
 
-Orders: Create and track customer orders, update statuses, manage history.
+- **Customer Accounts**  
+  Handle registration, login, and profile management  
 
-Payments: Secure transaction handling through WooCommerce’s payment gateways.
+- **Orders**  
+  Create and track customer orders, update statuses, manage history  
 
-Shipping: Retrieve shipping methods, costs, and update delivery info.
+- **Payments**  
+  Transaction handling through WooCommerce payment gateways  
 
-Coupons/Discounts: Apply promotional codes and dynamic pricing rules.
+- **Shipping**  
+  Retrieve shipping methods, costs, and update delivery info  
 
-🛠️ Tech Stack
+- **Coupons/Discounts**  
+  Apply promotional codes and pricing rules  
 
-Frontend: React.js, TailwindCSS/Custom Styling
+---
 
-Design: Figma (UI/UX mockups, responsive layouts)
+## 🛠️ Tech Stack
 
-Animation: Blender (intro experience)
+- **Frontend**: React.js, TailwindCSS/Custom Styling  
+- **Design**: Figma (UI/UX mockups, responsive layouts)  
+- **Animation**: Blender (intro)  
+- **Backend**: WooCommerce API  
 
-Backend: WooCommerce API
+---
 
-🚀 Roadmap
+## 🚀 Roadmap
 
-Add product filters & advanced search
-
-Responsive mobile-first design refinements
-
-Additional 3D/interactive elements
+- Add product filters & search  
+- Mobile-first design refinements  
+- Additional 3D/interactive elements  
