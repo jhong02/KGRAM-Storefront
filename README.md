@@ -61,7 +61,8 @@ Backend runs on the WooCommerce API to handle products, orders, payments, and mo
 
 -Image Progress
 <img width="2556" height="1316" alt="image" src="https://github.com/user-attachments/assets/8c0a4ae1-cb2c-4c21-a484-4a807864e104" />
-<img width="1919" height="958" alt="image" src="https://github.com/user-attachments/assets/fb9f5f4b-d4db-4d24-b8c4-d25af0a0e6ce" />
+<img width="2555" height="1315" alt="image" src="https://github.com/user-attachments/assets/ea4c2a2c-d161-4cd0-8b9b-26859220abed" />
+
 <img width="1919" height="955" alt="image" src="https://github.com/user-attachments/assets/6b84e2df-341f-4a30-9e7d-d4b3adc5d7fb" />
 
 
