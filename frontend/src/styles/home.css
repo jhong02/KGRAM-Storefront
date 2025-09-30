@@ -1,36 +1,48 @@
-/* Hero */
-.home .hero{ text-align:center; padding: clamp(32px, 6vw, 64px) 0 24px; }
-.home .hero h1{ font-size: clamp(36px, 6vw, 72px); margin:0 0 6px; font-weight:900; }
-.home .hero h2{ font-size: clamp(22px, 3.2vw, 36px); margin:0 0 6px; font-weight:900; }
-.home .hero p{ opacity:.8; margin:0; }
+/* =========================
+   HERO
+   ========================= */
+.home .hero { text-align:center; padding: clamp(32px, 6vw, 64px) 0 24px; }
+.home .hero h1 { font-size: clamp(36px, 6vw, 72px); margin:0 0 6px; font-weight:900; }
+.home .hero h2 { font-size: clamp(22px, 3.2vw, 36px); margin:0 0 6px; font-weight:900; }
+.home .hero p  { opacity:.8; margin:0; }
 
-/* Grid */
+/* =========================
+   GRID + CARDS
+   ========================= */
 .grid{
   display:grid;
   gap:28px;
   margin-bottom:64px;
   grid-template-columns: 1fr;
 }
-@media (min-width:640px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (min-width:640px){  .grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (min-width:1024px){ .grid{ grid-template-columns: repeat(3, 1fr); } }
 @media (min-width:1280px){ .grid{ grid-template-columns: repeat(4, 1fr); } }
 
-/* Cards */
 .card{
-  background:#fff; border:3px solid #111; border-radius:10px; padding:12px;
-  display:flex; flex-direction:column;
+  background: rgba(255,255,255,0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
 }
-.card .thumb{
+.card__thumb{
   aspect-ratio: 4 / 5;
-  background:linear-gradient(135deg,#a3c8ff,#fff);
-  border-radius:8px; border:3px solid #111; margin-bottom:12px;
+  background: linear-gradient(135deg, #a3c9ff, #eff3ff);
+  border-radius: 8px;
+  border: 3px solid #111;
+  margin-bottom: 12px;
 }
-.card h3{ font-size:14px; font-weight:800; margin:6px 0; text-transform:uppercase; }
-.card .price{ font-size:14px; }
+.card__title{ font-size:14px; font-weight:800; margin:6px 0; text-transform:uppercase; }
+.card__price{ font-size:14px; }
 
-/* Full-bleed background video */
+/* =========================
+   BACKGROUND VIDEO
+   ========================= */
 .home { position: relative; min-height: 100svh; }
-
 .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
 .bg__video {
   position: absolute; inset: 0;
@@ -41,7 +53,6 @@
 }
 .bg__scrim {
   position: absolute; inset: 0;
-  /* gentle glassy haze so text stays readable */
   background:
     radial-gradient(1200px 600px at 50% 10%, rgba(255,255,255,.18), transparent 60%),
     linear-gradient(to bottom, rgba(255,255,255,.10), rgba(255,255,255,.08));
@@ -49,8 +60,8 @@
   pointer-events: none;
 }
 
-/* Glass containers */
-.glass {
+/* Glass utility (optional wrapper) */
+.glass{
   background: rgba(255,255,255,0.30);
   -webkit-backdrop-filter: blur(14px) saturate(120%);
   backdrop-filter: blur(14px) saturate(120%);
@@ -60,28 +71,121 @@
   padding: clamp(12px, 2vw, 24px);
 }
 
-/* Optional: make the product cards a bit frosty too */
-.card {
-  background: rgba(255,255,255,0.55);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.55);
-  border-radius: 10px;
-  padding: 12px;
-  display: flex; flex-direction: column;
+/* =========================
+   BANNER SLIDER  (fixed)
+   ========================= */
+.banner-slider{
+  position: relative;
+  z-index: 1;              /* sit ABOVE the fixed bg video */
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;    /* let track take the full height */
+  background: transparent;
 }
 
-/* Keep your existing .card__thumb gradient/border; works great over video */
-.card__thumb {
-  aspect-ratio: 4 / 5;
-  background: linear-gradient(135deg, #a3c9ff, #eff3ff);
-  border-radius: 8px;
-  border: 3px solid #111;
-  margin-bottom: 12px;
+.banner-track{
+  position: relative;      /* create a stacking context for children */
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.banner-track::-webkit-scrollbar{ display:none; }
+
+/* Each slide is EXACTLY one viewport width of the track */
+.banner-item{
+  flex: 0 0 110%;
+  width: 100%;
+  height: 80vh;            /* keep tall; tweak if you like */
+  position: relative;
+  scroll-snap-align: start;
+  isolation: isolate;
 }
 
-/* Respect reduced motion users */
-@media (prefers-reduced-motion: reduce) {
-  .bg__video { animation: none; }
-  .bg__video { filter: blur(12px) saturate(110%); }
+/* Image (no blur, covers slide) */
+.banner-item img{
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);  /* start slightly zoomed in */
+  filter: none;            /* ensure not inheriting any blur */
+}
+
+/* Copy block (eyebrow, headline, button) */
+.banner-copy{
+  position: absolute;
+  inset: auto auto 8vh 6vw;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  /* pre-active state (so pop-in has somewhere to come from) */
+  opacity: 0;
+  transform: translateY(10px) scale(.96);
+}
+.banner-copy .eyebrow{
+  letter-spacing:.12em; font-weight:800; text-transform:uppercase; color:#fff; opacity:.95;
+}
+.banner-copy .headline{
+  font-size: clamp(28px, 6vw, 72px);
+  line-height: 1.02; color:#fff; font-weight:900;
+  text-shadow: 0 8px 40px rgba(0,0,0,.45);
+}
+.banner-copy .cta{
+  align-self:flex-start;
+  border:0; padding:14px 28px; border-radius:999px;
+  background:#ffbf2e; font-weight:900; text-transform:uppercase; letter-spacing:.03em;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  cursor:pointer;
+  transform: scale(.94);
+}
+
+/* Arrows */
+.arrow{
+  position:absolute; top:50%; transform:translateY(-50%);
+  border:0; background:rgba(0,0,0,.35);
+  color:#fff; font-size:42px; line-height:1;
+  border-radius:10px; padding:6px 12px; cursor:pointer; z-index:3;
+}
+.arrow.left{ left:16px; } .arrow.right{ right:16px; }
+.arrow:hover{ background:rgba(0,0,0,.55); }
+
+/* Animations */
+.banner-item.is-active img{ animation: heroZoom 6s ease-out forwards; }
+.banner-item.is-active .banner-copy{ animation: popIn .75s cubic-bezier(.2,.9,.2,1) .15s forwards; }
+.banner-item.is-active .banner-copy .cta{
+  animation: popIn .75s cubic-bezier(.2,.9,.2,1) .28s forwards;
+}
+
+/* CTA float on hover (keeps pop-in result, then floats) */
+@keyframes ctaFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-8px) scale(1)} }
+.banner-item.is-active .banner-copy .cta:hover{
+  animation:
+    popIn .75s cubic-bezier(.2,.9,.2,1) .28s forwards,
+    ctaFloat 1.6s ease-in-out infinite;
+  box-shadow: 0 14px 34px rgba(0,0,0,.28);
+  will-change: transform;
+}
+
+/* Keyframes */
+@keyframes heroZoom { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
+@keyframes popIn { 0%{opacity:0; transform:translateY(12px) scale(.94)} 100%{opacity:1; transform:translateY(0) scale(1)} }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .banner-item.is-active img,
+  .banner-item.is-active .banner-copy,
+  .banner-item.is-active .banner-copy .cta{ animation:none !important; }
+  .banner-copy{ opacity:1; transform:none; }
+}
+@media (max-width: 768px){
+  .banner-item{ height:70vh; }
+  .banner-copy{ inset:auto auto 7vh 5vw; }
 }

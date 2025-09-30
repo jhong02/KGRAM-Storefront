@@ -32,10 +32,8 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-align: center;
-
   -webkit-text-stroke: 1.5px #000; /* black outline */
 }
-
 
 /* Base button (unchanged from earlier except a bit more padding) */
 .enter-btn {
@@ -57,7 +55,6 @@
 
 /* Hover: slow rainbow + bounce */
 .enter-btn:hover {
-  /* animated rainbow gradient */
   background: linear-gradient(
     90deg,
     #ff6b6b, #ffd166, #06d6a0, #118ab2, #9b5de5, #ff6b6b
@@ -68,7 +65,6 @@
     rainbow 8s linear infinite;
 }
 
-/* Pressed feel still works while hovering */
 .enter-btn:active {
   transform: translateY(2px) scale(0.99);
   box-shadow: 0 4px 0 #111, 0 8px 18px rgba(0,0,0,.22);
@@ -79,7 +75,6 @@
   from { transform: translateY(0); }
   to   { transform: translateY(-8px); }
 }
-
 @keyframes rainbow {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -92,4 +87,83 @@
     animation: none;
     background: var(--brand, #ffd400);
   }
+}
+
+/* =========================
+   AGE VERIFICATION MODAL
+   ========================= */
+.agegate {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+}
+
+.agegate__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(2px);
+  animation: fadeIn .2s ease-out both;
+}
+
+.agegate__card {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 92vw);
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35);
+  text-align: center;
+  animation: popIn .25s cubic-bezier(.2,.9,.2,1) both;
+}
+
+.agegate__title {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+.agegate__text {
+  margin: 0 0 18px;
+  color: #333;
+  opacity: .9;
+}
+
+.agegate__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.agegate__btn {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.agegate__btn:active { transform: translateY(1px) scale(.98); }
+
+.agegate__btn--yes {
+  background: #f86aa1;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(248,106,161,.35);
+}
+.agegate__btn--no {
+  background: #111;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes popIn {
+  from { opacity:0; transform: translateY(10px) scale(.96); }
+  to   { opacity:1; transform: none; }
 }
